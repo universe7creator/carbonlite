@@ -1,0 +1,17 @@
+{
+  "name": "CarbonLite",
+  "slug": "carbonlite",
+  "tagline": "Beautiful code screenshots as a service",
+  "description": "Beautiful code screenshots as a service",
+  "price": "9",
+  "features": [],
+  "tech_stack": "Vercel + Node.js",
+  "status": "building",
+  "vercel_url": null,
+  "github_url": null,
+  "lemonsqueezy_checkout_url": null,
+  "lemonsqueezy_product_id": null,
+  "webhook_url": null,
+  "created_cycle": null,
+  "deployed_cycle": null
+}

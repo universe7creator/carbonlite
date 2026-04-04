@@ -1,0 +1,14 @@
+{
+  "name": "carbonlite",
+  "version": "1.0.0",
+  "description": "Beautiful code screenshots as a service",
+  "main": "api/process.js",
+  "scripts": {
+    "dev": "node dev-server.js",
+    "vercel-build": "echo 'Build complete'"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
