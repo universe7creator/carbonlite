@@ -3,29 +3,1085 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CarbonLite</title>
+  <title>CarbonLite — Beautiful Code Screenshots as a Service</title>
+  <meta name="description" content="Turn your code into beautiful, shareable screenshots. Perfect for social media, documentation, and presentations. CarbonLite makes your code look stunning.">
+  <meta name="keywords" content="code screenshot, code sharing, developer tools, carbon, code image, syntax highlighting">
+  <meta name="author" content="CarbonLite">
+  <meta name="theme-color" content="#0f0f0f">
+
+  <link rel="canonical" href="https://carbonlite-ai.vercel.app">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://carbonlite-ai.vercel.app">
+  <meta property="og:title" content="CarbonLite — Beautiful Code Screenshots">
+  <meta property="og:description" content="Turn your code into beautiful, shareable screenshots. Perfect for social media, documentation, and presentations.">
+  <meta property="og:image" content="https://carbonlite-ai.vercel.app/og-image.svg">
+  <meta property="og:site_name" content="CarbonLite">
+
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://carbonlite-ai.vercel.app">
+  <meta property="twitter:title" content="CarbonLite — Beautiful Code Screenshots">
+  <meta property="twitter:description" content="Turn your code into beautiful, shareable screenshots. Perfect for social media, documentation, and presentations.">
+  <meta property="twitter:image" content="https://carbonlite-ai.vercel.app/og-image.svg">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-tertiary: #1a1a1a;
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --accent-purple: #8b5cf6;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-gradient: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-hover: rgba(255, 255, 255, 0.06);
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #667eea, #764ba2); min-height: 100vh; color: #333; }
-    .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; text-align: center; color: white; }
-    h1 { font-size: 3rem; margin-bottom: 20px; }
-    p { font-size: 1.2rem; opacity: 0.9; margin-bottom: 40px; }
-    .cta { display: inline-block; background: white; color: #667eea; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; }
-    .cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.15), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 50%, rgba(59, 130, 246, 0.1), transparent),
+        radial-gradient(ellipse 50% 30% at 20% 80%, rgba(6, 182, 212, 0.08), transparent);
+      animation: bgPulse 15s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgPulse {
+      0% { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+
+    /* Floating Particles */
+    .particles {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent-purple);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.3; }
+      90% { opacity: 0.3; }
+      100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 16px 0;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .navbar-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-cta {
+      background: var(--accent-gradient);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 120px 20px 60px;
+      position: relative;
+    }
+
+    .hero-content { max-width: 800px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.1;
+      animation: fadeInUp 0.6s ease 0.1s forwards;
+      opacity: 0;
+    }
+
+    .gradient-text {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .tagline {
+      font-size: 1.5rem;
+      opacity: 0.9;
+      margin-bottom: 20px;
+      font-weight: 300;
+      animation: fadeInUp 0.6s ease 0.2s forwards;
+      opacity: 0;
+    }
+
+    .hero .description {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 0.6s ease 0.3s forwards;
+      opacity: 0;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--accent-gradient);
+      color: white;
+      padding: 18px 50px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+      animation: fadeInUp 0.6s ease 0.4s forwards;
+      opacity: 0;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+    }
+
+    /* CTA Glow Effect */
+    @keyframes ctaGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(59, 130, 246, 0.2); }
+      50% { box-shadow: 0 0 30px rgba(139, 92, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.3); }
+    }
+
+    .cta-glow {
+      animation: ctaGlow 2s ease-in-out infinite;
+    }
+
+    .price-tag {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      animation: fadeInUp 0.6s ease 0.5s forwards;
+      opacity: 0;
+    }
+
+    /* Demo Section */
+    .demo-section {
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    .container { max-width: 1000px; margin: 0 auto; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-label {
+      display: inline-block;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--accent-purple);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .code-window {
+      background: var(--bg-secondary);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .code-header {
+      background: var(--bg-tertiary);
+      padding: 12px 20px;
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot.red { background: #ff5f56; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #27ca40; }
+
+    .code-content {
+      padding: 30px;
+      text-align: left;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .code-line { display: flex; }
+    .line-number { color: #606366; width: 40px; text-align: right; margin-right: 20px; }
+    .code-text { color: #d4d4d4; }
+    .keyword { color: #c586c0; }
+    .function { color: #dcdcaa; }
+    .string { color: #ce9178; }
+    .comment { color: #6a9955; }
+
+    /* Features Section */
+    .features {
+      padding: 100px 20px;
+      background: var(--bg-secondary);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      padding: 32px;
+      border-radius: 16px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      background: var(--glass-hover);
+      border-color: rgba(139, 92, 246, 0.3);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--accent-gradient);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin: 0 auto 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* How It Works */
+    .how-it-works {
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .step {
+      flex: 1;
+      min-width: 250px;
+      max-width: 280px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    .step:hover {
+      background: var(--glass-hover);
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    .step-number {
+      width: 56px;
+      height: 56px;
+      background: var(--accent-gradient);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0 auto 20px;
+    }
+
+    .step h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* Pricing Section */
+    .pricing {
+      padding: 100px 20px;
+      background: var(--bg-secondary);
+    }
+
+    .pricing-card {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 24px;
+      padding: 48px;
+      max-width: 420px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent-gradient);
+    }
+
+    .pricing-badge {
+      display: inline-block;
+      background: var(--accent-gradient);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+
+    .pricing-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-size: 4rem;
+      font-weight: 800;
+      margin: 20px 0;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .price span {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      -webkit-text-fill-color: var(--text-muted);
+    }
+
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin: 32px 0;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--glass-border);
+      color: var(--text-secondary);
+    }
+
+    .pricing-features li:last-child {
+      border-bottom: none;
+    }
+
+    .check-icon {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.8rem;
+      color: white;
+    }
+
+    /* FAQ Section */
+    .faq {
+      padding: 100px 20px;
+      background: var(--bg-secondary);
+    }
+
+    .faq-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-item {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(139, 92, 246, 0.3);
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.1);
+    }
+
+    .faq-question {
+      padding: 24px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .faq-question:hover {
+      background: var(--glass-hover);
+    }
+
+    .faq-question span:first-child {
+      color: var(--text-primary);
+    }
+
+    .faq-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--accent-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: white;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      padding: 0 28px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 0 28px 24px;
+      max-height: 300px;
+    }
+
+    .faq-answer p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      border-top: 1px solid var(--glass-border);
+      padding-top: 20px;
+    }
+
+    /* Trust Badges */
+    .trust-section {
+      padding: 60px 20px;
+      background: var(--bg-primary);
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .trust-badge:hover {
+      background: var(--glass-hover);
+      border-color: rgba(139, 92, 246, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .trust-badge svg {
+      width: 18px;
+      height: 18px;
+      color: #10b981;
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    footer {
+      padding: 60px 20px;
+      border-top: 1px solid var(--glass-border);
+      text-align: center;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent-purple);
+      text-decoration: none;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.5rem; }
+      .hero .tagline { font-size: 1.2rem; }
+      .steps { flex-direction: column; align-items: center; }
+      .step { max-width: 100%; }
+      .section-title { font-size: 2rem; }
+      .pricing-card { padding: 32px 24px; }
+      .price { font-size: 3rem; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>CarbonLite</h1>
-    <p>Beautiful code screenshots as a service</p>
-    <a href="#" class="cta" id="buyBtn">Get Started — 9</a>
-  </div>
+  <div class="bg-gradient"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <a href="#" class="logo">
+        <div class="logo-icon">📸</div>
+        <span class="logo-text">CarbonLite</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+      <a href="#pricing" class="nav-cta">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Now with AI Themes
+      </div>
+      <h1>Beautiful Code<br><span class="gradient-text">Screenshots</span></h1>
+      <p class="tagline">Turn your code into stunning, shareable images</p>
+      <p class="description">Perfect for Twitter, documentation, blog posts, and presentations. No design skills needed.</p>
+      <a href="#pricing" class="cta-button cta-glow">Get Started — $9</a>
+      <p class="price-tag">One-time payment • Lifetime access</p>
+    </div>
+  </section>
+
+  <!-- Demo Section -->
+  <section class="demo-section" id="demo">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Preview</span>
+        <h2 class="section-title">See It In Action</h2>
+        <p class="section-subtitle">Beautiful syntax highlighting with 20+ themes</p>
+      </div>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="dot red"></div>
+          <div class="dot yellow"></div>
+          <div class="dot green"></div>
+        </div>
+        <div class="code-content">
+          <div class="code-line">
+            <span class="line-number">1</span>
+            <span class="code-text"><span class="keyword">async function</span> <span class="function">createMagic</span>() {</span>
+          </div>
+          <div class="code-line">
+            <span class="line-number">2</span>
+            <span class="code-text">  <span class="comment">// Transform your code into art</span></span>
+          </div>
+          <div class="code-line">
+            <span class="line-number">3</span>
+            <span class="code-text">  <span class="keyword">const</span> screenshot = <span class="keyword">await</span> <span class="function">CarbonLite</span>.<span class="function">capture</span>({</span>
+          </div>
+          <div class="code-line">
+            <span class="line-number">4</span>
+            <span class="code-text">    theme: <span class="string">'oceanic'</span>,</span>
+          </div>
+          <div class="code-line">
+            <span class="line-number">5</span>
+            <span class="code-text">    font: <span class="string">'JetBrains Mono'</span>,</span>
+          </div>
+          <div class="code-line">
+            <span class="line-number">6</span>
+            <span class="code-text">    windowStyle: <span class="string">'macos'</span></span>
+          </div>
+          <div class="code-line">
+            <span class="line-number">7</span>
+            <span class="code-text">  });</span>
+          </div>
+          <div class="code-line">
+            <span class="line-number">8</span>
+            <span class="code-text">  <span class="keyword">return</span> screenshot.<span class="function">share</span>();</span>
+          </div>
+          <div class="code-line">
+            <span class="line-number">9</span>
+            <span class="code-text">}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Features</span>
+        <h2 class="section-title">Everything You Need</h2>
+        <p class="section-subtitle">Professional code screenshots in seconds</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>20+ Themes</h3>
+          <p>From VS Code to Monokai, Dracula to Nord. Find your perfect style.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Lightning Fast</h3>
+          <p>Get your screenshot in under 2 seconds. No waiting, no queues.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>Social Ready</h3>
+          <p>Optimized for Twitter, LinkedIn, and blog posts. Perfect dimensions every time.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔤</div>
+          <h3>Premium Fonts</h3>
+          <p>Fira Code, JetBrains Mono with ligature support. Programmer's favorites.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🖼️</div>
+          <h3>Any Format</h3>
+          <p>Export as PNG, JPG, or SVG. Perfect for any use case.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h3>Window Styles</h3>
+          <p>macOS, Windows, or minimal. Match your brand aesthetic.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Process</span>
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Three simple steps to beautiful screenshots</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Paste Your Code</h3>
+          <p>Copy and paste your code snippet into CarbonLite editor</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Customize Style</h3>
+          <p>Pick theme, font, and window style that matches your brand</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Export & Share</h3>
+          <p>Download high-quality image ready to share anywhere</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Badges Section -->
+  <section class="trust-section">
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        20+ Themes
+      </div>
+      <div class="trust-badge">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        50+ Languages
+      </div>
+      <div class="trust-badge">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        Lifetime Access
+      </div>
+      <div class="trust-badge">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        No Signup Required
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Pricing</span>
+        <h2 class="section-title">Simple Pricing</h2>
+        <p class="section-subtitle">Pay once, use forever</p>
+      </div>
+      <div class="pricing-card">
+        <span class="pricing-badge">Best Value</span>
+        <h3 class="pricing-title">Lifetime Access</h3>
+        <div class="price">$9 <span>/one-time</span></div>
+        <ul class="pricing-features">
+          <li><span class="check-icon">✓</span> Unlimited screenshots</li>
+          <li><span class="check-icon">✓</span> All 20+ themes</li>
+          <li><span class="check-icon">✓</span> All export formats</li>
+          <li><span class="check-icon">✓</span> Premium fonts</li>
+          <li><span class="check-icon">✓</span> All window styles</li>
+          <li><span class="check-icon">✓</span> Priority support</li>
+          <li><span class="check-icon">✓</span> Lifetime updates</li>
+        </ul>
+        <a href="#" class="cta-button cta-glow" style="width: 100%; display: block;" onclick="handlePurchase(); return false;">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title gradient-text">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Everything you need to know about CarbonLite</p>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What is CarbonLite?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>CarbonLite is a beautiful code screenshot generator that turns your code snippets into stunning, shareable images perfect for social media, blog posts, and documentation.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Do I need to create an account?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>No account required! Simply purchase lifetime access and start creating beautiful code screenshots immediately. Your purchase is linked to your email.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What formats can I export to?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>You can export your code screenshots as PNG, JPG, or SVG. All exports are high-resolution and optimized for web and print.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Is there a limit on screenshots?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>No limits! With lifetime access, you can create unlimited screenshots. Use it for personal projects, client work, or content creation.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Can I use it commercially?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Absolutely! Your lifetime license includes commercial use. Create screenshots for client projects, courses, books, or any commercial purpose.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What programming languages are supported?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>CarbonLite supports 50+ programming languages including JavaScript, Python, TypeScript, Go, Rust, Java, C++, and more with syntax highlighting.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 CarbonLite. All rights reserved.</p>
+      <p style="margin-top: 8px;">Questions? Contact <a href="https://t.me/gokhanbot" target="_blank">@gokhanbot</a></p>
+    </div>
+  </footer>
+
   <script>
-    const CHECKOUT_URL = window.__CHECKOUT_URL || null;
-    document.getElementById('buyBtn').addEventListener('click', (e) => {
-      e.preventDefault();
-      if (CHECKOUT_URL) window.open(CHECKOUT_URL, '_blank');
-      else alert('Store coming soon! Contact @OtonomUniverseCreator on Telegram.');
+    // Floating Particles
+    function createParticles() {
+      const container = document.querySelector('.particles');
+      if (!container) return;
+
+      const particleCount = 25;
+      const colors = ['#8b5cf6', '#3b82f6', '#06b6d4'];
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.width = (2 + Math.random() * 4) + 'px';
+        particle.style.height = particle.style.width;
+        container.appendChild(particle);
+      }
+    }
+
+    // Initialize particles on load
+    document.addEventListener('DOMContentLoaded', createParticles);
+
+    function handlePurchase() {
+      window.open('https://profitbridge.lemonsqueezy.com/checkout/buy/1f5103be-a76e-4b96-bb7e-3813c9b5ba6b', '_blank');
+    }
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const isActive = item.classList.contains('active');
+
+        // Close all FAQ items
+        document.querySelectorAll('.faq-item').forEach(faq => {
+          faq.classList.remove('active');
+        });
+
+        // Open clicked item if it wasn't active
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
     });
   </script>
 </body>
