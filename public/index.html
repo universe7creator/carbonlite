@@ -914,6 +914,128 @@
     </div>
   </section>
 
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Testimonials</span>
+        <h2 class="section-title">Loved by Developers</h2>
+        <p class="section-subtitle">See what our users are saying</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"CarbonLite has completely transformed how I share code on Twitter. The screenshots look absolutely stunning and get so much more engagement!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AM</div>
+            <div class="testimonial-info">
+              <h4>Alex Mitchell</h4>
+              <p>Frontend Developer</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"I use CarbonLite daily for my blog posts and documentation. The themes are beautiful and the export quality is perfect. Best $9 I've spent!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SJ</div>
+            <div class="testimonial-info">
+              <h4>Sarah Johnson</h4>
+              <p>Technical Writer</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Finally a code screenshot tool that just works. No signup, no watermarks, just beautiful images. My LinkedIn posts have never looked better!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">DK</div>
+            <div class="testimonial-info">
+              <h4>David Kim</h4>
+              <p>Full Stack Engineer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* Testimonials Section */
+    .testimonials {
+      padding: 100px 20px;
+      background: var(--bg-primary);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(139, 92, 246, 0.3);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .testimonial-stars {
+      color: #fbbf24;
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-text {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: white;
+    }
+
+    .testimonial-info h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .testimonial-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+
   <!-- Trust Badges Section -->
   <section class="trust-section">
     <div class="trust-badges">
