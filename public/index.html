@@ -18,6 +18,11 @@
   <meta property="og:image" content="https://carbonlite-ai.vercel.app/og-image.svg">
   <meta property="og:site_name" content="CarbonLite">
 
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CarbonLite — Beautiful Code Screenshots">
+<meta name="twitter:description" content="Turn your code into beautiful, shareable screenshots. Perfect for social media, documentation, and presentations.">
+<meta name="twitter:image" content="https://carbonlite-ai.vercel.app/og-image.svg">
+
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://carbonlite-ai.vercel.app">
   <meta property="twitter:title" content="CarbonLite — Beautiful Code Screenshots">
@@ -796,6 +801,7 @@
       <ul class="nav-links">
         <li><a href="#features">Features</a></li>
         <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
         <li><a href="#pricing">Pricing</a></li>
       </ul>
       <a href="#pricing" class="nav-cta">Get Started</a>
@@ -867,6 +873,52 @@
           <div class="code-line">
             <span class="line-number">9</span>
             <span class="code-text">}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Testimonials</span>
+        <h2 class="section-title">Loved by Developers</h2>
+        <p class="section-subtitle">See what our users say about CarbonLite</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"CarbonLite transformed how I share code. The screenshots look professional and the syntax highlighting is spot-on. My blog posts look so much better now."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MK</div>
+            <div class="testimonial-info">
+              <h4>Michael Kim</h4>
+              <p>Tech Blogger</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"I use this daily for documentation and social media. The customizable themes and perfect padding make every screenshot share-worthy. Worth every penny!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SC</div>
+            <div class="testimonial-info">
+              <h4>Sarah Chen</h4>
+              <p>Frontend Developer</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Finally a code screenshot tool that just works. No signup, no watermarks, instant results. I've recommended it to my entire dev team."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RJ</div>
+            <div class="testimonial-info">
+              <h4>Robert Johnson</h4>
+              <p>Lead Engineer</p>
+            </div>
           </div>
         </div>
       </div>
@@ -1063,6 +1115,171 @@
     .testimonial-info p {
       font-size: 0.85rem;
       color: var(--text-muted);
+    }
+
+    /* Live Demo Playground */
+    .demo-section {
+      padding: 100px 20px;
+      background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+      position: relative;
+    }
+
+    .demo-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(139, 92, 246, 0.08), transparent);
+      pointer-events: none;
+    }
+
+    .demo-container {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .demo-editor {
+      background: #1e1e2e;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(139, 92, 246, 0.1);
+    }
+
+    .demo-editor-header {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .demo-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .demo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .demo-dot.red { background: #ff5f56; }
+    .demo-dot.yellow { background: #ffbd2e; }
+    .demo-dot.green { background: #27c93f; }
+
+    .demo-filename {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .demo-code-area {
+      padding: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      min-height: 280px;
+      background: transparent;
+      border: none;
+      color: #e2e8f0;
+      width: 100%;
+      resize: vertical;
+      outline: none;
+    }
+
+    .demo-code-area::placeholder {
+      color: var(--text-muted);
+    }
+
+    .demo-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .demo-themes {
+      display: flex;
+      gap: 8px;
+    }
+
+    .demo-theme-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .demo-theme-btn:hover,
+    .demo-theme-btn.active {
+      border-color: white;
+      transform: scale(1.1);
+    }
+
+    .demo-theme-ocean { background: linear-gradient(135deg, #1e3a5f, #2d5a87); }
+    .demo-theme-purple { background: linear-gradient(135deg, #4c1d95, #7c3aed); }
+    .demo-theme-dark { background: linear-gradient(135deg, #18181b, #27272a); }
+    .demo-theme-sunset { background: linear-gradient(135deg, #c2410c, #ea580c); }
+
+    .demo-generate-btn {
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .demo-generate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+    }
+
+    .demo-preview {
+      margin-top: 32px;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 16px;
+      border: 1px dashed rgba(139, 92, 246, 0.3);
+      text-align: center;
+      display: none;
+    }
+
+    .demo-preview.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .demo-preview img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .demo-preview-text {
+      color: var(--text-muted);
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 
